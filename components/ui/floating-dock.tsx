@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 
-
 interface DockItem {
   id: string;
   label: string;
@@ -25,6 +24,8 @@ interface FloatingDockProps {
     | 'left-center'
     | 'right-center';
   className?: string;
+  /** When true, the dock is not fixed-positioned (use inside a parent fixed container). */
+  embedded?: boolean;
 }
 
 // Helper function to get tooltip positioning
@@ -241,6 +242,7 @@ const FloatingDock: React.FC<FloatingDockProps> = ({
   items: customItems,
   position = 'bottom-right',
   className = '',
+  embedded = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -350,7 +352,6 @@ const FloatingDock: React.FC<FloatingDockProps> = ({
       type: 'link',
       external: true,
     },
-
   ];
 
   const items = customItems || defaultItems;
@@ -384,8 +385,12 @@ const FloatingDock: React.FC<FloatingDockProps> = ({
     return 'flex-row space-x-2';
   };
 
+  const rootClassName = embedded
+    ? `relative z-[9999] ${className}`
+    : `fixed z-[9999] ${getPositionClasses()} ${className}`;
+
   return (
-    <div className={`fixed z-[9999] ${getPositionClasses()} ${className}`}>
+    <div className={rootClassName}>
       <div
         className={`flex items-center ${position === 'bottom-right' ? 'flex-col-reverse space-y-2 space-y-reverse' : getItemLayout()}`}
         ref={dockRef}

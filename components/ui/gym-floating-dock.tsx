@@ -1,7 +1,6 @@
 'use client';
 
-
-
+import BackToTopButton from './back-to-top-button';
 import FloatingDock from './floating-dock';
 
 interface GymFloatingDockProps {
@@ -18,7 +17,6 @@ const GymFloatingDock: React.FC<GymFloatingDockProps> = ({
   position = 'bottom-right',
   className = '',
 }) => {
-
   const gymDockItems = [
     {
       id: 'facebook',
@@ -160,15 +158,22 @@ const GymFloatingDock: React.FC<GymFloatingDockProps> = ({
       type: 'link' as const,
       external: true,
     },
-
   ];
 
   return (
-    <FloatingDock
-      className={className}
-      items={gymDockItems}
-      position={position}
-    />
+    <div className="pointer-events-none fixed right-[max(1.5rem,env(safe-area-inset-right,0px))] bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] z-[9999] flex flex-col-reverse items-end gap-3">
+      <div className="pointer-events-auto">
+        <FloatingDock
+          className={className}
+          embedded
+          items={gymDockItems}
+          position={position}
+        />
+      </div>
+      <div className="pointer-events-auto">
+        <BackToTopButton />
+      </div>
+    </div>
   );
 };
 
