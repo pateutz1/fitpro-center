@@ -9,7 +9,6 @@ import AnimatedGradientText from '@/components/ui/animated-gradient-text';
 import Counter from '@/components/ui/counter';
 import ExpandableCard from '@/components/ui/expandable-card';
 import FaqSection from '@/components/ui/faq';
-import GymFloatingDock from '@/components/ui/gym-floating-dock';
 import MagneticButton from '@/components/ui/magnetic-button';
 import ProgressRing, {
   ProgressRingPresets,
@@ -2557,8 +2556,6 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Floating Dock - Fixed to viewport */}
-      <GymFloatingDock position="bottom-right" />
     </>
   );
 }

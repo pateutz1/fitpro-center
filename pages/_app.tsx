@@ -3,6 +3,7 @@ import Head from 'next/head';
 import '@/styles/globals.css';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import GymFloatingDock from '@/components/ui/gym-floating-dock';
 // import { PerformanceMonitor } from '@/components/ui/performance-monitor'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
         <Footer />
+        <GymFloatingDock position="bottom-right" />
 
         {/* Performance Monitors - Disabled */}
         {/* {process.env.NODE_ENV === 'development' && (
